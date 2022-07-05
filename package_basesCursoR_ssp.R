@@ -34,4 +34,9 @@ ssp1$ano <- as.factor(ssp1$ano)
 
 # Análises ---------------------------------------------------------------------------------------------------------------------------------
 
+ssp2 <- ssp1 %>%
+  group_by(ano) %>%
+  summarise(med_est = mean(estupro_total))
 
+ggplot(ssp2, aes(x = ano, y = med_est)) +
+  geom_col()
