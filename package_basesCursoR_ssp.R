@@ -138,3 +138,19 @@ p7 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_roubo),
                     ymax = med_roubo + se_roubo), width = 0.3, size = 0.9) +
   labs(x = "Ano", y = "Roubos de banco")
 p7
+
+p8 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_hom), 
+                       y = med_hom)) +
+  geom_col(fill = "#fdc086", color = "black") +
+  geom_errorbar(aes(x = municipio_nome, y = med_hom, ymin = med_hom - se_hom,
+                    ymax = med_hom + se_hom), width = 0.3, size = 0.9) +
+  labs(x = "Ano", y = "Homicídios doloso")
+p8
+
+p9 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_fur), 
+                       y = med_fur)) +
+  geom_col(fill = "#beaed4", color = "black") +
+  geom_errorbar(aes(x = municipio_nome, y = med_fur, ymin = med_fur - se_fur,
+                    ymax = med_fur + se_fur), width = 0.3, size = 0.9) +
+  labs(x = "Ano", y = "Furtos de veículos")
+p9
