@@ -36,7 +36,16 @@ ssp1$ano <- as.factor(ssp1$ano)
 
 ssp2 <- ssp1 %>%
   group_by(ano) %>%
-  summarise(med_est = mean(estupro_total))
+  summarise(med_est = mean(estupro_total),
+            med_fur = mean(furto_veiculos),
+            med_hom = mean(hom_doloso),
+            med_roubo = mean(roubo_banco),
+            med_vit_lat = mean(vit_latrocinio))
 
-ggplot(ssp2, aes(x = ano, y = med_est)) +
-  geom_col()
+p1 <- ggplot(ssp2, aes(x = fct_reorder(ano, med_est), y = med_est)) +
+  geom_col(fill = "#7fc97f", color = "black")
+p1
+
+p2 <- ggplot(ssp2, aes(x = fct_reorder(ano, med_fur), y = med_fur)) +
+  geom_col(fill = "#7fc97f", color = "black")
+p2
