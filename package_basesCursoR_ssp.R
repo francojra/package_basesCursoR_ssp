@@ -136,7 +136,7 @@ p7 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_roubo),
   geom_col(fill = "#ffff99", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_roubo, ymin = med_roubo - se_roubo,
                     ymax = med_roubo + se_roubo), width = 0.3, size = 0.9) +
-  labs(x = "Ano", y = "Roubos de banco")
+  labs(x = "Municípios", y = "Roubos de banco")
 p7
 
 p8 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_hom), 
@@ -144,7 +144,7 @@ p8 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_hom),
   geom_col(fill = "#fdc086", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_hom, ymin = med_hom - se_hom,
                     ymax = med_hom + se_hom), width = 0.3, size = 0.9) +
-  labs(x = "Ano", y = "Homicídios doloso")
+  labs(x = "Municípios", y = "Homicídios doloso")
 p8
 
 p9 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_fur), 
@@ -152,7 +152,7 @@ p9 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_fur),
   geom_col(fill = "#beaed4", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_fur, ymin = med_fur - se_fur,
                     ymax = med_fur + se_fur), width = 0.3, size = 0.9) +
-  labs(x = "Ano", y = "Furtos de veículos")
+  labs(x = "Municípios", y = "Furtos de veículos")
 p9
 
 p10 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_est), 
@@ -160,7 +160,7 @@ p10 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_est),
   geom_col(fill = "#7fc97f", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_est, ymin = med_est - se_est,
                     ymax = med_est + se_est), width = 0.3, size = 0.9) +
-  labs(x = "Ano", y = "Estupros")
+  labs(x = "Municípios", y = "Estupros")
 p10
 
 grid.arrange(p6, p7, p8, p9, p10)
