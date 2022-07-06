@@ -123,14 +123,16 @@ ssp3 <- ssp1 %>%
 
 View(ssp3)
 
-p6 <- ggplot(ssp3, aes(x = municipio_nome, y = med_vit_lat)) +
+p6 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_vit_lat), 
+                       y = med_vit_lat)) +
   geom_col(fill = "#386cb0", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_vit_lat, ymin = med_vit_lat - se_vit_lat,
                     ymax = med_vit_lat + se_vit_lat), width = 0.3, size = 0.9) +
   labs(x = "Municípios", y = "Vítimas de latrocínio")
 p6
 
-p7 <- ggplot(ssp3, aes(x = municipio_nome, y = med_roubo)) +
+p7 <- ggplot(ssp3, aes(x = fct_reorder(municipio_nome, med_roubo), 
+                       y = med_roubo)) +
   geom_col(fill = "#ffff99", color = "black") +
   geom_errorbar(aes(x = municipio_nome, y = med_roubo, ymin = med_roubo - se_roubo,
                     ymax = med_roubo + se_roubo), width = 0.3, size = 0.9) +
