@@ -24,11 +24,13 @@ View(ssp)
 # Selecionar dados -------------------------------------------------------------------------------------------------------------------------
 
 ssp1 <- ssp %>%
-  select(ano, estupro_total, furto_veiculos, hom_doloso, 
+  select(municipio_nome, ano, estupro_total, furto_veiculos, hom_doloso, 
          roubo_banco, vit_latrocinio) %>%
   filter(ano %in% c("2010", "2011", "2012", "2013", 
                          "2014", "2015", "2016", 
-                       "2017", "2018")) 
+                       "2017", "2018")) %>%
+  filter(municipio_nome %in% c("Adamantina", "Altair", "Araraquara",
+                               "São Paulo", "Sorocaba"))
 View(ssp1)  
 glimpse(ssp1)
 ssp1$ano <- as.factor(ssp1$ano)
@@ -101,3 +103,36 @@ p5
 
 grid.arrange(p1, p2, p3, p4, p5)
 
+ssp3 <- ssp1 %>%
+  group_by(municipio_nome) %>%
+  summarise(med_est = mean(estupro_total),
+            med_fur = mean(furto_veiculos),
+            med_hom = mean(hom_doloso),
+            med_roubo = mean(roubo_banco),
+            med_vit_lat = mean(vit_latrocinio),
+            sd_est = sd(estupro_total),n_est = n(),
+            se_est = sd_est/sqrt(n_est),
+            sd_vit_lat = sd(vit_latrocinio), n_vit_lat = n(),
+            se_vit_lat = sd_vit_lat/sqrt(n_vit_lat),
+            sd_fur = sd(furto_veiculos),n_fur = n(),
+            se_fur = sd_fur/sqrt(n_fur),
+            sd_hom = sd(hom_doloso),n_hom = n(),
+            se_hom = sd_hom/sqrt(n_hom),
+            sd_roubo = sd(roubo_banco),n_roubo = n(),
+            se_roubo = sd_roubo/sqrt(n_roubo))
+
+View(ssp3)
+
+p6 <- ggplot(ssp3, aes(x = municipio_nome, y = med_vit_lat)) +
+  geom_col(fill = "#386cb0", color = "black") +
+  geom_errorbar(aes(x = municipio_nome, y = med_vit_lat, ymin = med_vit_lat - se_vit_lat,
+                    ymax = med_vit_lat + se_vit_lat), width = 0.3, size = 0.9) +
+  labs(x = "Municípios", y = "Vítimas de latrocínio")
+p6
+
+p7 <- ggplot(ssp3, aes(x = municipio_nome, y = med_roubo)) +
+  geom_col(fill = "#ffff99", color = "black") +
+  geom_errorbar(aes(x = municipio_nome, y = med_roubo, ymin = med_roubo - se_roubo,
+                    ymax = med_roubo + se_roubo), width = 0.3, size = 0.9) +
+  labs(x = "Ano", y = "Roubos de banco")
+p7
